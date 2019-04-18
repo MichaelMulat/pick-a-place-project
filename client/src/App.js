@@ -7,11 +7,11 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import Home from "./pages/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Event from "./pages/Event";
-import Create from "./pages/Create"
-import Vote from "./pages/Vote"
+import Create from "./pages/Create";
+import Vote from "./pages/Vote";
 import Result from "./pages/Result";
 import UserContextProvider from "./utils/UserContextProvider";
-
+import NoMatch from "./components/NoMatch"
 class App extends Component {
   render() {
     return (
@@ -29,16 +29,13 @@ class App extends Component {
                   component={Event}
                 />
                 <ProtectedRoute exact path="/create" component={Create} />
-                <ProtectedRoute
-                  exact
-                  path="/vote/:eventId"
-                  component={Vote}
-                />
+                <ProtectedRoute exact path="/vote/:eventId" component={Vote} />
                 <ProtectedRoute
                   exact
                   path="/result/:eventId"
                   component={Result}
                 />
+                <Route component={NoMatch} />
               </Switch>
             </div>
           </Router>

@@ -19,7 +19,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/pickaplace_db",
   {
@@ -28,7 +27,7 @@ mongoose.connect(
   }
 );
 var store = new MongoDBStore({
-  uri: "mongodb://localhost/pickaplace_db",
+  uri: process.env.MONGODB_URI || "mongodb://localhost/pickaplace_db",
   collection: "mySessions"
 });
 

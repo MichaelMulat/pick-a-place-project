@@ -9,9 +9,7 @@ import { Link } from "react-router-dom";
 function NavBar(props) {
 
   const {userState, logout} = useContext(UserContext)
-  
-  console.log("Navbar", userState.loggedIn)
-  return (
+    return (
     <div>
       <AppBar position="static">
         <Toolbar>

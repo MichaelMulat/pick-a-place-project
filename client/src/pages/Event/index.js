@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-// import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-// import UserContext from "../../utils/UserContext";
 import LocationData from "../../components/LocationData";
 import { Typography } from "@material-ui/core";
 import API from "../../utils/API";
