@@ -25,6 +25,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   //Create
+  
   create: function(req, res) {
     db.Event.create(req.body)
       .then(dbModel =>
@@ -54,5 +55,22 @@ module.exports = {
     ).then(
       console.log(res.data)
     ).catch(err => console.log(err));
+  },
+
+  voteLocation: function(req, res){
+    console.log("voting req", req.body)
+    db.Event.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $push: {
+          attendees: {
+            userId: req.body.userId,
+            votedFor: req.body.votedFor
+          }
+        }
+      }
+    )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => console.log(err));
   }
 };

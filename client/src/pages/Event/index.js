@@ -28,7 +28,7 @@ function Event({ match }) {
           eventTime: res.data.eventTime,
           attendees: res.data.attendees
         });
-        // console.log("event data for list", res.data);
+        console.log("event data for list", res.data);
       })
       .then(() => {
         getLocations(eventId)

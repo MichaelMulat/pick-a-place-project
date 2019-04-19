@@ -8,9 +8,8 @@ import UserContext from "../../utils/UserContext";
 import LocationInput from "../../components/LocationInput";
 import LocationData from "../../components/LocationData";
 import ProfileInfo from "../../components/ProfileInfo";
-import  FileCopy from "@material-ui/icons/FileCopy";
+import FileCopy from "@material-ui/icons/FileCopy";
 import IconButton from "@material-ui/core/IconButton";
-
 
 const Create = props => {
   const { userState } = useContext(UserContext);
@@ -39,11 +38,9 @@ const Create = props => {
     });
   };
 
-  const copyLink = () => {
+  const copyLink = () => {};
 
-  }
-
-  console.log("Where am I", window.location.hostname)
+  console.log("Where am I", window.location.hostname);
 
   const createEvent = event => {
     event.preventDefault();
@@ -84,7 +81,8 @@ const Create = props => {
       .catch(err => console.log(err));
   };
 
-
+  const voteUrl = window.location.hostname + "/vote/" + eventId;
+  console.log(voteUrl);
   let formstage;
 
   // if step = 1 show
@@ -160,6 +158,8 @@ const Create = props => {
         </form>
       </Paper>
     );
+
+    // if step = 2 show
   } else if (state.step === 2) {
     formstage = (
       <Paper
@@ -192,37 +192,37 @@ const Create = props => {
     );
   } else if (state.step === 3) {
     formstage = (
-      <Paper
-        style={{
-          margin: "-10px auto",
-          padding: "10px 20px"
-        }}
-      >
-        <Typography component="h1" variant="h3" color="secondary">
-          Invite Guests{" "}
-        </Typography>
-        <Typography component="h1" color="primary">
-          Copy and send the link below to invite your friends{" "}
-        </Typography>
-        <Paper
-          style={{
-            padding: "10px"
-          }}
-        >
-          <InputBase
+      <Grid container>
+        <Grid item xs={12}>
+          <Paper
             style={{
-              flexGrow: 1
+              margin: "-10px auto",
+              padding: "10px 20px"
             }}
-            onChange={handleInputChange}
-            name="inviteLink"
-            value="/vote/"
-            className="event-input"
-          />
-          <IconButton aria-label="copyLink" onClick={copyLink}>
+          >
+            <Typography component="h1" variant="h3" color="secondary">
+              Invite Guests{" "}
+            </Typography>
+            <Typography component="h1" color="primary">
+              Copy and send the link below to invite your friends{" "}
+            </Typography>
+          </Paper>
+          <Paper
+            style={{
+              marginTop: "40px",
+              padding: "10px"
+            }}
+          >
+            <Typography component="subtitle2" color="primary">
+              {voteUrl}
+            </Typography>
+
+            {/* <IconButton aria-label="copyLink" onClick={copyLink}>
             <FileCopy />
-          </IconButton>
-        </Paper>
-      </Paper>
+          </IconButton> */}
+          </Paper>
+        </Grid>
+      </Grid>
     );
   }
 

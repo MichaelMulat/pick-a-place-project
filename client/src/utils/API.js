@@ -1,4 +1,5 @@
 import axios from "axios";
+import { futimesSync } from "fs";
 
 export default {
   //Users
@@ -25,9 +26,9 @@ export default {
     return axios.post("/api/user/logout");
   },
 
-  addEventToUser: function(req){
-    console.log("avent to user req", req)
-    return axios.post("/api/event/user/"+ req.userId, req)
+  addEventToUser: function(req) {
+    console.log("avent to user req", req);
+    return axios.post("/api/event/user/" + req.userId, req);
   },
 
   // Events
@@ -39,11 +40,11 @@ export default {
   },
 
   getEvent: function(eventId) {
-    return axios.get("/api/event/" + eventId)
+    return axios.get("/api/event/" + eventId);
   },
   // Deletes the book with the given id
   deleteEvent: function(id) {
-    console.log("deleting")
+    console.log("deleting");
     return axios.delete("/api/event/" + id);
   },
   // Saves a book to the database
@@ -63,9 +64,12 @@ export default {
   },
 
   queryPlaceId: function(locationId) {
-    console.log("Getting google places data")
+    console.log("Getting google places data");
     return axios.get("/api/location/placesGoogle/" + locationId);
+  },
+
+  voteLocation: function(voteData, eventId) {
+    // console.log("Vote Data");
+    return axios.post("/api/event/vote/" + eventId, voteData);
   }
-
-
 };

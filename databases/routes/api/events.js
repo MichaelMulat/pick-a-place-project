@@ -15,7 +15,7 @@ router
   .put(eventController.update)
   .delete(eventController.remove);
 
-
+router.route("/vote/:id").post(eventController.voteLocation)
   // Matches with "/api/event/user/:id"
 router
   .route("/user/:id")

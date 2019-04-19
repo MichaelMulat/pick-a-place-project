@@ -55,10 +55,10 @@ const LocationItem = props => {
         </Button>
         {type === "vote" ? (
           <Button
-            // variant={
-            //   state.pickedplaceId === location._id ? "outlined" : "text"
-            // }
-            color={state.pickedplaceId === location._id ? "primary" : "text"}
+            variant={
+              state.pickedplaceId === location._id ? "outlined" : "text"
+            }
+            // color={state.pickedplaceId === location._id ? "primary" : "text"}
             name={location._id}
             onClick={pickLocation}
           >
