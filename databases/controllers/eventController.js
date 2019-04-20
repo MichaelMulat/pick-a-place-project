@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the Ee
+// Defining methods for the Events
 module.exports = {
   findAll: function(req, res) {
     console.log(req.query);
@@ -19,13 +19,15 @@ module.exports = {
   findById: function(req, res) {
     db.Event.findById(req.params.id)
       .populate("location")
-      .then(dbModel =>
-        res.json(dbModel)
-      )
+      .populate("author", "_id firstName lastName")
+      .populate({
+        path: "attendee"
+      } )
+      .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   //Create
-  
+
   create: function(req, res) {
     db.Event.create(req.body)
       .then(dbModel =>
@@ -69,8 +71,8 @@ module.exports = {
           }
         }
       }
-    )
-      .then(dbModel => res.json(dbModel))
+    ).then(dbModel => 
+        res.json(dbModel))
       .catch(err => console.log(err));
   }
 };

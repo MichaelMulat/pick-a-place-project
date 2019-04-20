@@ -1,5 +1,5 @@
 const db = require("../models");
-const axios = require("axios")
+const axios = require("axios");
 
 // Defining methods for the booksController
 module.exports = {
@@ -38,6 +38,15 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  incVote: function(req, res) {
+    db.Location.findOneAndUpdate(
+      { _id: req.params.id },
+      { $inc: { votes: 1 } }
+    )
+      .then(res => console.log(res))
+      .catch(err => res.status(422).json(err));
+  },
+
   remove: function(req, res) {
     db.Location.findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
@@ -46,9 +55,13 @@ module.exports = {
   },
   googleAPI: function(req, res) {
     const placeid = req.params.id;
-    return axios.get(
-      "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeid + "&fields=name,website,rating,geometry,formatted_phone_number&key=AIzaSyASD8l4ED4-0lpLSgZ_fiHTr9XvBm4SYH4"
-    )
-    .then(model => res.status(200).json(model.data)).catch(err => res.status(422).json(err));
+    return axios
+      .get(
+        "https://maps.googleapis.com/maps/api/place/details/json?placeid=" +
+          placeid +
+          "&fields=name,website,rating,geometry,formatted_phone_number&key=AIzaSyASD8l4ED4-0lpLSgZ_fiHTr9XvBm4SYH4"
+      )
+      .then(model => res.status(200).json(model.data))
+      .catch(err => res.status(422).json(err));
   }
 };

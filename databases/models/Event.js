@@ -5,6 +5,7 @@ const eventSchema = new Schema({
   eventName: { type: String, required: true },
   eventDate: { type: String, required: true },
   eventTime: { type: String, required: true },
+  isclosed: {type: Boolean, default: false},
   location: [
     {
       type: Schema.Types.ObjectId,
@@ -17,7 +18,7 @@ const eventSchema = new Schema({
       ref: "User"
     }
   ,
-  attendees: [
+  attendees: [ 
     {
       userId: {
         type: Schema.Types.ObjectId,
@@ -31,6 +32,6 @@ const eventSchema = new Schema({
   ]
 });
 
-const Event = mongoose.model("Event", eventSchema);
+const Event = mongoose.model("Event", eventSchema, "Event");
 
 module.exports = Event;

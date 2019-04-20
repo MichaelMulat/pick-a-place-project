@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Component, useContext } from "react";
 import LocationItem from "../LocationItem";
-import { Grid, List, Typography, Button } from "@material-ui/core";
+import { Grid, List, Typography, Button, Link } from "@material-ui/core";
 import API from "../../utils/API";
 import MapContainer from "../MapContainer";
 import UserContext from "../../utils/UserContext";
@@ -23,7 +23,7 @@ const VoteList = props => {
     });
   };
 
-  console.log("picked place", state.pickedplaceId);
+  console.log("picked place", state.pickedplaceId, "step", state.step);
 
   let voteStage;
 
@@ -31,20 +31,35 @@ const VoteList = props => {
     API.voteLocation({
       userId : userState.id,
       votedFor: state.pickedplaceId
-    }, eventId);
+    }, eventId).then(
+      API.addVote(state.pickedplaceId)
+    ).then((res) => {
+      console.log(res.data)
+      const currentStep = state.step;
+      setState({ ...state, step: currentStep + 1 });
+    }).catch(err => console.log(err));
   };
 
-  const nextStep = e => {
-    e.preventDefault();
-    setState({ ...state, step: 2 });
+  const nextStep = () => {
+    const currentStep = state.step
+
+    setState({ ...state, step: currentStep + 1 });
+  }
+
+  const notAttending = () => {
+    return (
+      <Grid container spacing={24}>
+        <Typography variant="h2">Thanks for letting us know.</Typography>
+      </Grid>
+    );
   }
 
 
   if (state.step === 1) {
     voteStage = (
-      <Grid container spacing={16} justify="center" style={{}}>
-        <Grid item xs={12}>
-          <Typography component="h1" variant="h3" color="secondary">
+      <Grid container spacing={24} justify="center">
+        <Grid item xs={12} sm={12}>
+          <Typography component="h1" variant="h3" color="secondary" >
             Will you be able to attend this event?
           </Typography>
         </Grid>
@@ -59,7 +74,7 @@ const VoteList = props => {
           </Button>
         </Grid>
         <Grid item xs={6}>
-          <Button fullWidth={true} variant="contained" color="primary">
+          <Button onClick={notAttending} fullWidth={true} variant="contained" color="primary">
             No
           </Button>
         </Grid>
@@ -69,9 +84,9 @@ const VoteList = props => {
     voteStage = (
       <Grid
         container
-        spacing={16}
+        spacing={24}
         justify="center"
-        style={{ margin: "30px 10px" }}
+        style={{ margin: "30px 0px" }}
       >
         <Grid item xs={12}>
           {locations.map(location => (
@@ -98,6 +113,17 @@ const VoteList = props => {
         </Grid>
       </Grid>
     );
+  } else if(state.step === 3) {
+    voteStage = (
+      <Grid container spacing={24}>
+        <Typography variant="h2">
+          Thanks for voting. 
+          
+           <Link color="primary" href={"/result/" + eventId}> See Results</Link>
+        </Typography>
+      </Grid>
+    );
+    
   }
 
   return (

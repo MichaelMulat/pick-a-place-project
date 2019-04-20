@@ -71,5 +71,9 @@ export default {
   voteLocation: function(voteData, eventId) {
     // console.log("Vote Data");
     return axios.post("/api/event/vote/" + eventId, voteData);
+  },
+
+  addVote: function(locationId){
+    return axios.put("/api/location/vote/" + locationId)
   }
 };

@@ -14,6 +14,9 @@ function Vote({ match }) {
     eventName: "",
     eventDate: null,
     eventTime: null,
+    hostId: "",
+    hostFirstName: "",
+    hostLastName: "",
     attendees: []
   });
 
@@ -28,6 +31,10 @@ function Vote({ match }) {
           eventName: res.data.eventName,
           eventDate: res.data.eventDate,
           eventTime: res.data.eventTime,
+          hostId: res.data.author._id,
+          hostFirstName: res.data.author.firstName,
+          hostLastName: res.data.author.lastName,
+
           attendees: res.data.attendees
         });
         console.log("event data for list", res.data);
@@ -49,16 +56,22 @@ function Vote({ match }) {
         </Grid>
         <Grid item xs={12} sm={8}>
           <Paper shadow={0} style={{ padding: "20px" }}>
-            <Typography variant="h3">{event.eventName}</Typography>
+            <Typography variant="h1" color="primary">
+              Vote
+            </Typography>
+            <Typography variant="h3" gutterBottom={true}>
+              {event.eventName}
+            </Typography>
+
             <Typography variant="subtitle1">
-              <span>Date: {event.eventDate}</span>
-              <span>Time: {event.eventTime}</span>
+              Hosted by: {event.hostFirstName} {event.hostLastName} - Date:{" "}
+              {event.eventDate} - Time: {event.eventTime}
             </Typography>
           </Paper>
         </Grid>
         <Grid container justify="center">
           <Grid item xs={12} sm={6}>
-            <VoteList eventId={eventId} locations={locations} />
+            <VoteList eventId={eventId} event={event} locations={locations} />
           </Grid>
         </Grid>
       </Grid>
