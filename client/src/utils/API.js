@@ -42,15 +42,16 @@ export default {
   getEvent: function(eventId) {
     return axios.get("/api/event/" + eventId);
   },
-  // Deletes the book with the given id
   deleteEvent: function(id) {
-    console.log("deleting");
     return axios.delete("/api/event/" + id);
   },
-  // Saves a book to the database
   saveEvent: function(eventData) {
     console.log(eventData, "event data");
     return axios.post("/api/event/" + eventData.author, eventData);
+  },
+  endVote: function(req, eventId) {
+    console.log("updating Vote", req);
+    return axios.put("/api/event/" + eventId, req);
   },
 
   //Save a location
@@ -73,7 +74,7 @@ export default {
     return axios.post("/api/event/vote/" + eventId, voteData);
   },
 
-  addVote: function(locationId){
-    return axios.put("/api/location/vote/" + locationId)
+  addVote: function(locationId) {
+    return axios.put("/api/location/vote/" + locationId);
   }
 };
