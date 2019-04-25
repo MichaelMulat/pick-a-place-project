@@ -81,7 +81,8 @@ const Create = props => {
       .catch(err => console.log(err));
   };
 
-  const voteUrl = window.location.hostname + "/vote/" + eventId;
+  const voteUrl =
+    "https://" + window.location.hostname + ":3000/vote/" + eventId;
   console.log(voteUrl);
   let formstage;
 
@@ -91,10 +92,10 @@ const Create = props => {
       <Paper
         style={{
           margin: "-10px auto",
-          padding: "10px 20px"
+          padding: "30px 20px 10px"
         }}
       >
-        <Typography component="h1" variant="h3" color="secondary">
+        <Typography component="h1" variant="h3" color="primary">
           Create New Event
         </Typography>
 
@@ -162,20 +163,24 @@ const Create = props => {
     // if step = 2 show
   } else if (state.step === 2) {
     formstage = (
-      <Paper
-        style={{
-          margin: "-10px auto",
-          padding: "10px 20px"
-        }}
-      >
-        <Typography component="h1" variant="h3" color="primary">
-          Suggest locations{" "}
-        </Typography>
+      <Grid container spacing={16}>
+        <Grid item xs={12} sm={12}>
+          <Paper
+            style={{
+              margin: "-10px auto",
+              padding: "10px 20px"
+            }}
+          >
+            <Typography component="h1" variant="h3" color="primary">
+              Suggest locations{" "}
+            </Typography>
 
-        <LocationInput eventId={eventId} getLocations={getLocations} />
-        <LocationData eventId={eventId} locations={locations} />
+            <LocationInput eventId={eventId} getLocations={getLocations} />
+          </Paper>
 
-        <Grid container />
+          <LocationData eventId={eventId} locations={locations} />
+        </Grid>
+
         <Grid item xs={12} sm={12}>
           <Button
             fullWidth
@@ -188,7 +193,7 @@ const Create = props => {
             Next
           </Button>
         </Grid>
-      </Paper>
+      </Grid>
     );
   } else if (state.step === 3) {
     formstage = (

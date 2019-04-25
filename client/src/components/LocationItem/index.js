@@ -44,9 +44,17 @@ const LocationItem = props => {
       }}
     >
       <CardContent>
-        <Typography variant="h5">{place.locationName}</Typography>
-        <Typography>{place.address}</Typography>
-        <Typography>{place.phone}</Typography>
+        <Grid container spacing={16}>
+          <Grid item xs={8}>
+            <Typography variant="h5">{place.locationName}</Typography>
+            <Typography>{place.address}</Typography>
+            <Typography>{place.phone}</Typography>
+          </Grid>
+
+          <Grid item xs={4}>
+            {place.rating && <Typography variant="h5" color="primary">Rating: {place.rating}</Typography>}
+          </Grid>
+        </Grid>
       </CardContent>
 
       <CardActions>

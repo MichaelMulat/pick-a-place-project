@@ -13,15 +13,13 @@ const LocationData = props => {
     <Grid container spacing={16} justify="center"
     style={{
     }}>
-      <Grid item xs={12} sm={6}>
-        <List component="nav">
+      <Grid item xs={12} sm={8}>
           {locations.map(location => (
             <LocationItem
               key={location._id}
               location={location}
             />
           ))}
-        </List>{" "}
       </Grid>
 
       <Grid item xs={12} sm={12}>
