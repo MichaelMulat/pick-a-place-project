@@ -59,7 +59,7 @@ module.exports = {
       .get(
         "https://maps.googleapis.com/maps/api/place/details/json?placeid=" +
           placeid +
-          "&fields=name,website,rating,geometry,formatted_phone_number&key=AIzaSyASD8l4ED4-0lpLSgZ_fiHTr9XvBm4SYH4"
+          "&fields=name,website,rating,geometry,formatted_phone_number&key=GOOGLE_API_KEY"
       )
       .then(model => res.status(200).json(model.data))
       .catch(err => res.status(422).json(err));
