@@ -28,4 +28,4 @@ yarn start
 
 ## Author
 
-* **Michael Mulat** - *Initial work* - [Portfolio](https://github.com/MichaelMulat)
+* **Michael Mulat** - [Portfolio](https://github.com/MichaelMulat)
